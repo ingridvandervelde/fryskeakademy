@@ -39,7 +39,7 @@ def server(input, output, session):
   @output
   @render.plot
   def multidimensional_clustering():
-    df = pd.read_csv(r'C:\Users\vande\OneDrive\Documenten\School\Jaar 3\Minor\Collaborative data project\Pokemon.csv')
+    df = pd.read_csv(r'data/Pokemon.csv')
     # k means
     kmeans = KMeans(n_clusters=3, random_state=0)
     df['cluster'] = kmeans.fit_predict(df[['Attack', 'Defense']])
