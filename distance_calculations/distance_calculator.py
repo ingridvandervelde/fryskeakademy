@@ -32,30 +32,38 @@ def calculate_distance_all(languages_counters: dict[str: Counter]) -> pd.DataFra
 
 
 def calculate_distance_pairwise(languages_counters: dict[str: Counter]) -> pd.DataFrame:
+    # get all languages and init empty dataframe
     languages: [str] = list(languages_counters.keys())
     distances = pd.DataFrame(index=languages, columns=languages)
     distances.astype('float64')
 
+    # get all possible combinations for pairwise comparison and iterate over them
     lang_combis = combinations(languages, 2)
-
     for lang_a, lang_b in lang_combis:
+        # get the inventory of pos-trigrams for the two languages
         trigrams: set[str] = set(languages_counters[lang_a] + languages_counters[lang_b])
 
+        # create an empty dataframe with the indexes and columns
         df = pd.DataFrame(index=[lang_a, lang_b], columns=sorted(trigrams))
         df = df.astype('float64')
+
+        # get the total number of trigrams in the given counter
         len_a: int = sum(languages_counters[lang_a].values())
         len_b: int = sum(languages_counters[lang_b].values())
 
+        # set the frequencies for the languages
         df.loc[lang_a] = {k: v / len_a for k, v in languages_counters[lang_a].items()}
         df.loc[lang_b] = {k: v / len_b for k, v in languages_counters[lang_b].items()}
 
+        # fill NaN so that frequencies of unknown trigrams are 0
         df = df.fillna(0)
 
         correlation: float = df.T.corr()[lang_a][lang_b]
 
+        # 1 minus the pearson correlation
         distances[lang_a][lang_b] = 1 - correlation
         distances[lang_b][lang_a] = 1 - correlation
 
+    # set same language distance to 0
     distances = distances.fillna(0)
-
     return distances
