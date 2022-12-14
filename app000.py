@@ -18,12 +18,31 @@ from sklearn.manifold import MDS
 
 ### User Interace 
 
+choices = {
+  "Afrikaans": "Afrikaans", "Danish": "Danish", "Dutch": "Dutch", 
+  "English": "English", "Faroese": "Faroese", "Frisian": "Frisian", 
+  "German": "German", 
+  "Icelandic": "Icelandic", "Gronings": "Gronings"
+  }
+
 app_ui = ui.page_fluid(
 # https://shiny.rstudio.com/py/api/reference/shiny.ui.input_file.html
-  ui.input_file("files", "Upload CoNLL-U files", accept=[".conllu"], multiple=True),
-
-  ui.output_plot("dendrogram"),
-  ui.output_plot("multidimensional_clustering")
+  ui.navset_tab_card(
+        ui.nav("Homepage", "info"),
+        ui.nav("Upload CoNLL-U files", 
+        (ui.input_file("files", "Upload CoNLL-U files", accept=[".conllu"], multiple=True),
+        ui.input_text("x1", "Type language corresponding to the CoNLL-U file", placeholder="Enter language"),
+        ui.input_action_button("files", "Calculate", class_="btn-success"),
+        ui.output_plot("dendrogram"),
+        ui.output_plot("multidimensional_clustering"))
+        ),
+        ui.nav("Choose from a set of languages", 
+        (ui.input_checkbox_group("x2", "Choose languages", choices),
+        ui.input_action_button("x2", "Calculate", class_="btn-success"),
+        ui.output_plot("dendrogram"),
+        ui.output_plot("multidimensional_clustering"))
+        ),
+    )
 )
 
 ### Server
@@ -46,7 +65,8 @@ def server(input, output, session):
 # respond on 'allfiles', and calculate distances between conllu files
 
 # respond on 'distance matrix' and show dendrogram and multidimensional scaling plot
-
+  @reactive.event(input.file)
+  @reactive.event(input.x1)
   @output
   @render.plot
   def dendrogram():
@@ -62,7 +82,8 @@ def server(input, output, session):
     return(fig)
 
 
-
+  @reactive.event(input.file)
+  @reactive.event(input.x1)
   @output
   @render.plot
   def multidimensional_clustering():
