@@ -16,6 +16,8 @@ import matplotlib.pyplot as plt
 import pandas as pd
 from sklearn.manifold import MDS
 
+from distance_calculations import conllu_to_counter
+from collections import Counter
 ### User Interace 
 
 choices = {
@@ -54,13 +56,39 @@ def server(input, output, session):
     @reactive.Effect
     @reactive.event(input.files)
     def allfiles():
-        listFiles = list()
+        dict_languages = dict()
 
-        for x in range(0, 4):
-            f: list[FileInfo] = input.files()
-            df = pd.read_csv(f[0]["datapath"])
-            listFiles.append(df)
-        return (listFiles)
+        files: list[FileInfo] = input.files()
+
+        for file in files:
+            path = file['datapath']
+            filename = file['name']
+
+            dict_languages[filename] = conllu_to_counter(path)
+
+        return dict_languages
+
+    def ask_language(dict_languages: dict[str, Counter]):
+        languages_counters: dict[str: Counter]
+
+        filenames = dict_languages.keys()
+
+        filename_to_language = {
+            'file1_dutch.conllu': 'Dutch'
+        }
+
+        languages_counters = {filename_to_language[k]: v for k, v in dict_languages.items()}
+
+        # {'file1_dutch.conllu': Counter()} -> {'Dutch': Counter()}
+        # ', '.join(filenames)
+        #
+        # input textbox
+
+        # user_input = "Dutch,English,Frisian"
+        # language_names = user_input.split(',')
+
+        return languages_counters
+
 
     # respond on 'allfiles', and calculate distances between conllu files
 
