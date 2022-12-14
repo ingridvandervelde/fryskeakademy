@@ -3,21 +3,20 @@ from mds_cluster import create_dendogram
 import pandas as pd
 import matplotlib.pyplot as plt
 
-files = [
-    'data/file1.conllu',
-    'data/file2.conllu'
-]
-
-counter_1 = conllu_to_counter(files[0])
-counter_2 = conllu_to_counter(files[1])
-
-lang = {
-    'Language1': counter_1,
-    'Language2': counter_2
+files = {
+    'Language1': 'data/file1.conllu',
+    'Language2': 'data/file2.conllu',
+    'Language3': 'data/file3.conllu'
 }
 
-df = calculate_distance_all(lang)
+lang = dict()
 
+for language, file in files.items():
+    lang[language] = conllu_to_counter(file)
+
+
+df = calculate_distance_all(lang)
+# df = calculate_distance_pairwise(lang)
 
 
 df.info()
