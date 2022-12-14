@@ -35,16 +35,20 @@ app_ui = ui.page_fluid(
                (ui.input_file("files", "Upload CoNLL-U files", accept=[".conllu"], multiple=True),
                 ui.input_text("x1", "Type language corresponding to the CoNLL-U file", placeholder="Enter language"),
                 ui.input_action_button("files", "Calculate", class_="btn-success"),
-                ui.output_plot("dendrogram"),
-                ui.output_plot("multidimensional_clustering"))
+                # ui.output_plot("dendrogram"),
+                # ui.output_plot("multidimensional_clustering")
+                )
                ),
         ui.nav("Choose from a set of languages",
                (ui.input_checkbox_group("x2", "Choose languages", choices),
                 ui.input_action_button("x2", "Calculate", class_="btn-success"),
-                ui.output_plot("dendrogram"),
-                ui.output_plot("multidimensional_clustering"))
+                # ui.output_plot("dendrogram2"),
+                # ui.output_plot("multidimensional_clustering2")
+                )
                ),
-    )
+    ),
+    ui.output_plot("dendrogram"),
+    ui.output_plot("multidimensional_clustering")
 )
 
 
@@ -93,8 +97,8 @@ def server(input, output, session):
     # respond on 'allfiles', and calculate distances between conllu files
 
     # respond on 'distance matrix' and show dendrogram and multidimensional scaling plot
-    @reactive.event(input.file)
-    @reactive.event(input.x1)
+    # @reactive.event(input.file)
+    # @reactive.event(input.x1)
     @output
     @render.plot
     def dendrogram():
@@ -109,8 +113,8 @@ def server(input, output, session):
                                   orientation='right')  # or: 'average'
         return (fig)
 
-    @reactive.event(input.file)
-    @reactive.event(input.x1)
+    # @reactive.event(input.file)
+    # @reactive.event(input.x1)
     @output
     @render.plot
     def multidimensional_clustering():
