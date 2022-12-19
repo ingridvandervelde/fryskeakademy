@@ -234,7 +234,7 @@ def server(input, output, session):
     def image1(): 
         from pathlib import Path
         dir = Path(__file__).resolve().parent
-        img: ImgData = {"src": str(dir / "data\WhatsApp Image 2022-12-15 at 15.10.08.jpeg"), "width": "300px"}
+        img: ImgData = {"src": str(dir / "data\Fryke_akademy.jpeg.jpeg"), "width": "300px"}
         return img
         
       
@@ -243,7 +243,7 @@ def server(input, output, session):
     # def image2(): 
     #     from pathlib import Path
     #     dir = Path(__file__).resolve().parent
-    #     img: ImgData = {"src": str(dir / "data\WhatsApp Image 2022-12-15 at 14.19.23.jpeg"), "width": "150px"}
+    #     img: ImgData = {"src": str(dir / """), "width": "150px"}
     #     return img
 
 app = App(app_ui, server)
