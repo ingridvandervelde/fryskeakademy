@@ -7,3 +7,5 @@ shiny~=0.2.9
 matplotlib~=3.6.2
 scipy~=1.9.3
 scikit-learn~=1.2.0
+MarkupSafe~=2.1.1
+Jinja2~=3.1.2

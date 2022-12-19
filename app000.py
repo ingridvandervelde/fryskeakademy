@@ -16,7 +16,7 @@ import matplotlib.pyplot as plt
 import pandas as pd
 from sklearn.manifold import MDS
 
-from distance_calculations import conllu_to_counter
+from distance_calculations import conllu_to_counter, calculate_distance_all
 from collections import Counter
 
 from shiny.types import ImgData
@@ -39,6 +39,7 @@ app_ui = ui.page_fluid(
                 #ui.input_text("x1", "Type language corresponding to the CoNLL-U file", placeholder="Enter language"),
                 ui.output_ui("text_box"),
                 ui.input_action_button("x1", "Calculate"),
+                ui.output_table("show_text"),
                 ui.output_plot("dendrogram1"),
                 ui.output_plot("multidimensional_clustering1")
                 )
@@ -59,38 +60,54 @@ app_ui = ui.page_fluid(
 ### Server
 
 def server(input, output, session):
+    dict_languages = reactive.Value(dict())
+    languages_counters = reactive.Value(dict())
+    filenames = reactive.Value([])
+    lang_distances = reactive.Value(pd.DataFrame())
     # create data structure containing conllu files
 
     @reactive.Effect
     @reactive.event(input.files)
     def allfiles():
-        dict_languages = dict()
-
+        local_dict = dict()
         files: list[FileInfo] = input.files()
 
         for file in files:
             path = file['datapath']
             filename = file['name']
 
-            dict_languages[filename] = conllu_to_counter(path)
-        
-        return dict_languages
-        
+            local_dict[filename] = conllu_to_counter(path)
+
+        dict_languages.set(local_dict)
+
         
     @output
     @render.ui
     @reactive.event(input.files)
     def text_box():
-      
-        file_list = list()
         files: list[FileInfo] = input.files()
-      
-        for file in files:
-            file_list.append(file)
-            return ui.input_text("n", "Type language corresponding to the CoNLL-U file", placeholder="Enter language")
-            
-      
-    
+
+        filenames.set([f['name'] for f in files])
+
+        return ui.input_text("n", f"Type language(s) corresponding to the CoNLL-U file(s) separated by a ', '. Example: 'Dutch, English, Frisian'\nOrder: {','.join(filenames.get())}", placeholder="Enter language(s)")
+
+
+    @output
+    @render.table
+    @reactive.event(input.x1)
+    @reactive.event(input.n)
+    def show_text():
+        languages = input.n()
+        languages = languages.split(', ')
+        file_lang = {x[0]: x[1] for x in zip(filenames.get(), languages)}
+
+        languages_counters.set({file_lang[k]: v for k, v in dict_languages.get().items()})
+
+        distances = calculate_distance_all(languages_counters.get())
+        lang_distances.set(distances)
+        return lang_distances.get()
+
+
     # def ask_language(dict_languages: dict[str, Counter]):
     #     languages_counters: dict[str: Counter]
     # 
@@ -119,7 +136,8 @@ def server(input, output, session):
     # respond on 'allfiles', and calculate distances between conllu files
 
     # respond on 'distance matrix' and show dendrogram and multidimensional scaling plot
-    
+
+
   
     
     @output
@@ -234,7 +252,7 @@ def server(input, output, session):
     def image1(): 
         from pathlib import Path
         dir = Path(__file__).resolve().parent
-        img: ImgData = {"src": str(dir / "data\Fryke_akademy.jpeg.jpeg"), "width": "300px"}
+        img: ImgData = {"src": str(dir / "data/Fryke_akademy.jpeg.jpeg"), "width": "300px"}
         return img
         
       

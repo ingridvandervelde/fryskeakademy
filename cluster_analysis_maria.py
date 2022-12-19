@@ -1,18 +1,18 @@
 from distance_calculations import conllu_to_counter, calculate_distance_all, calculate_distance_pairwise
 from mds_cluster import create_dendogram
-from sklearn.cluster import AgglomerativeClustering
-from sklearn.decomposition import PCA
-import seaborn as sns
-import numpy as np
-from sklearn.datasets import load_iris
-import pandas as pd
+# from sklearn.cluster import AgglomerativeClustering
+# from sklearn.decomposition import PCA
+# import seaborn as sns
+# import numpy as np
+# from sklearn.datasets import load_iris
+# import pandas as pd
 import matplotlib.pyplot as plt
 
 files = {
     'Afrikaans': 'data/af_afribooms-ud-train.conllu',
     'Danish': 'data/da_ddt-ud-train.conllu',
-    #'German': 'data/de_gsd-ud-train.conllu',
-    'German':'data/de_hdt-ud-test.conllu',
+    'German': 'data/de_gsd-ud-train.conllu',
+    # 'German':'data/de_hdt-ud-test.conllu',
     #'English': 'data/en_gum-ud-train.conllu',
     #'English': 'data/en_atis-ud-train.conllu',
     'English': 'data/en_ewt-ud-train.conllu',
