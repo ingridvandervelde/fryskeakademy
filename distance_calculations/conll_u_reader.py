@@ -8,7 +8,7 @@ def is_conllu_ext(filename: str) -> bool:
 
 
 def conllu_to_counter(filename: str) -> Counter:
-    with open(filename, 'r') as f:
+    with open(filename, 'r', encoding="utf8") as f:
         sentences = parse(f.read())
 
     trigram_counter = Counter()
