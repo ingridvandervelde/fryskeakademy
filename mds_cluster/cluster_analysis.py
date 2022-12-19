@@ -26,9 +26,9 @@ def create_dendogram(distances: pd.DataFrame):
                               color_threshold=0.3,
                               orientation='right',
                               labels=labels)
-    #plt.title('Dendrogram')
-    #plt.xlabel('Customers')
-    #plt.ylabel('Euclidean distances')
+    plt.title('Dendrogram of syntactic distances between Germanic languages')
+    plt.ylabel('Languages')
+    plt.xlabel('Distances')
     #plt.show()
 
     return (dnd)
