@@ -147,9 +147,11 @@ def server(input, output, session):
     @reactive.event(input.x1)
   
     def dendrogram1():
+      fig = plt.figure()
       dnd = create_dendogram(lang_distances.get())
+      
     
-      return dnd
+      return fig
       
         # X = np.random.rand(15, 12)
         # fig = plt.figure()
