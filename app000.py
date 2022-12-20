@@ -21,6 +21,8 @@ from collections import Counter
 
 from shiny.types import ImgData
 
+from mds_cluster import create_dendogram
+
 ### User Interace 
 
 choices = {
@@ -145,16 +147,20 @@ def server(input, output, session):
     @reactive.event(input.x1)
   
     def dendrogram1():
-        X = np.random.rand(15, 12)
-        fig = plt.figure()
-
-        # see: https://shiny.rstudio.com/py/docs/ui-page-layouts.html
-        # and  https://www.askpython.com/python/examples/dendrograms-in-python
-        dn = hierarchy.dendrogram(hierarchy.linkage(X, 'ward'),
-                                  above_threshold_color="blue",
-                                  color_threshold=0,
-                                  orientation='right')  # or: 'average'
-        return (fig)
+      dnd = create_dendogram(lang_distances.get())
+    
+      return dnd
+      
+        # X = np.random.rand(15, 12)
+        # fig = plt.figure()
+        # 
+        # # see: https://shiny.rstudio.com/py/docs/ui-page-layouts.html
+        # # and  https://www.askpython.com/python/examples/dendrograms-in-python
+        # dn = hierarchy.dendrogram(hierarchy.linkage(X, 'ward'),
+        #                           above_threshold_color="blue",
+        #                           color_threshold=0,
+        #                           orientation='right')  # or: 'average'
+        # return (fig)
       
     @output
     @render.plot
@@ -265,5 +271,7 @@ def server(input, output, session):
     #     return img
 
 app = App(app_ui, server)
+
+# call their functions with input of lang_distances.get()
 
 # test
