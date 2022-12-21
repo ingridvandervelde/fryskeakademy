@@ -64,13 +64,13 @@ app_ui = ui.page_fluid(
                   ),
                 ),
               ),
-        ui.nav("Choose from a set of languages",
+        ui.nav("List of languages",
                 ui.panel_title("Choose from a list of languages"),
                 
                 ui.layout_sidebar(
                   
                   ui.panel_sidebar(
-                  ui.input_checkbox_group("x2", "Choose languages", choices),
+                  ui.input_checkbox_group("x2", "Select multiple languages", choices),
                   ui.input_action_button("x2", "Calculate", class_="btn-success"),
                   ),
                   
