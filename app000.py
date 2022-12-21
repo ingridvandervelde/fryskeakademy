@@ -23,6 +23,7 @@ from shiny.types import ImgData
 
 from mds_cluster import create_dendogram
 
+
 ### User Interace 
 
 choices = {
@@ -32,30 +33,56 @@ choices = {
     "Icelandic": "Icelandic", "Gronings": "Gronings"
 }
 
+
 app_ui = ui.page_fluid(
     # https://shiny.rstudio.com/py/api/reference/shiny.ui.input_file.html
     ui.navset_tab_card(
-        ui.nav("Homepage", "info", ui.output_image("image1")),
+        ui.nav("Homepage", 
+                ui.panel_title("Syntactic Distance Calculator"),
+                  
+                ui.panel_main(
+                ui.output_text("txt"),
+                ui.output_image("image1"),
+                ),
+              ),
         ui.nav("Upload CoNLL-U files",
-               (ui.input_file("files", "Upload CoNLL-U files", accept=[".conllu"], multiple=True),
-                #ui.input_text("x1", "Type language corresponding to the CoNLL-U file", placeholder="Enter language"),
-                ui.output_ui("text_box"),
-                ui.input_action_button("x1", "Calculate"),
-                ui.output_table("show_text"),
-                ui.output_plot("dendrogram1"),
-                ui.output_plot("multidimensional_clustering1")
-                )
-               ),
+                ui.panel_title("Use your own CoNLL-U files"),
+                
+                ui.layout_sidebar(
+                  
+                  ui.panel_sidebar(
+                  ui.input_file("files", "Upload CoNLL-U files", accept=[".conllu"], multiple=True),
+                  #ui.input_text("x1", "Type language corresponding to the CoNLL-U file", placeholder="Enter language"),
+                  ui.output_ui("text_box"),
+                  ui.input_action_button("x1", "Calculate"),
+                  ui.output_table("show_text"),
+                  ),
+                  
+                  ui.panel_main(
+                  ui.output_plot("dendrogram1"),
+                  ui.output_plot("multidimensional_clustering1"),
+                  ),
+                ),
+              ),
         ui.nav("Choose from a set of languages",
-               (ui.input_checkbox_group("x2", "Choose languages", choices),
-                ui.input_action_button("x2", "Calculate", class_="btn-success"),
-                ui.output_plot("dendrogram2"),
-                ui.output_plot("multidimensional_clustering2")
-                )
+                ui.panel_title("Choose from a list of languages"),
+                
+                ui.layout_sidebar(
+                  
+                  ui.panel_sidebar(
+                  ui.input_checkbox_group("x2", "Choose languages", choices),
+                  ui.input_action_button("x2", "Calculate", class_="btn-success"),
+                  ),
+                  
+                  ui.panel_main(
+                  ui.output_plot("dendrogram2"),
+                  ui.output_plot("multidimensional_clustering2")
+                  ),
                ),
-    ),
+            ),
     # ui.output_plot("dendrogram"),
     # ui.output_plot("multidimensional_clustering")
+  ), 
 )
 
 
@@ -263,6 +290,10 @@ def server(input, output, session):
         img: ImgData = {"src": str(dir / "data/Fryke_akademy.jpeg.jpeg"), "width": "300px"}
         return img
         
+    @output
+    @render.text
+    def txt():
+        return f" Welcome to the website blablabla"
       
     # @output
     # @render.image
