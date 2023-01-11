@@ -1,0 +1,1 @@
+Within the app there is the function for pairwise comparison. You can either turn it on or off. When turned on, the data sets are compared pairwise. Which means that the data sets are compared in pairs, and the results are based upon that. When turning this option off, all the datasets will be compared at the same time. 

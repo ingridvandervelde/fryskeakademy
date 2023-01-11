@@ -255,7 +255,9 @@ def server(input, output, session):
     @output
     @render.text
     def txt():
-        return f" Welcome to the website blablabla"
+        with open ("homepage1.txt", "r") as finput:
+            homepage = finput.read()
+        return homepage
 
     # @output
     # @render.image
