@@ -42,7 +42,7 @@ print('\n Total Variance Explained:', var)
 
 #add axis labels
 x_axis = str(var)
-plt.xlabel('\n Total Variance Explained: '+ x_axis +' %')
+plt.xlabel('\n Total Variance Explained: '+ x_axis +'%')
 plt.ylabel('')
 
 #Assign labels
