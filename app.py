@@ -38,7 +38,13 @@ app_ui = ui.page_fluid(
                ui.panel_title("Syntactic Distance Calculator"),
 
                ui.panel_main(
-                   ui.output_text("txt"),
+                   ui.tags.p(ui.output_text("txt1")),
+                   ui.tags.p(ui.output_text("txt2")),
+                   ui.tags.p(ui.output_text("txt3")),
+                   ui.tags.p(ui.output_text("txt4")),
+                   ui.tags.p(ui.output_text("txt5")),
+                   ui.tags.p(ui.output_text("txt6")),
+                   ui.tags.p(ui.output_text("txt7")),
                    ui.output_image("image1"),
                ),
                ),
@@ -249,16 +255,64 @@ def server(input, output, session):
     def image1():
         from pathlib import Path
         dir = Path(__file__).resolve().parent
-        img: ImgData = {"src": str(dir / "data/Fryke_akademy.jpeg.jpeg"), "width": "300px"}
+        img: ImgData = {"src": str(dir / "data/updated_logo.jpeg"), "width": "300px"}
         return img
-
+    
+      
     @output
     @render.text
-    def txt():
-        with open ("homepage1.txt", "r") as finput:
-            homepage = finput.read()
-        return homepage
-
+    def txt1():
+      with open("data/summary.txt", "r") as fin:
+        summary = fin.read()
+        return summary
+      
+    
+    @output
+    @render.text
+    def txt2():
+      with open("data/upload.txt", "r") as fin:
+        upload = fin.read()
+        return upload
+    
+    @output
+    @render.text
+    def txt3():
+      with open("data/selected.txt", "r") as fin:
+        selected = fin.read()
+        return selected
+    
+    
+    @output
+    @render.text
+    def txt4():
+      with open("data/pair.txt", "r") as fin:
+        pair = fin.read()
+        return pair
+    
+ 
+    @output
+    @render.text
+    def txt5():
+      with open("data/table.txt", "r") as fin:
+        table = fin.read()
+        return table
+    
+    
+    @output
+    @render.text
+    def txt6():
+      with open("data/dnd.txt", "r") as fin:
+        dnd = fin.read()
+        return dnd
+    
+    
+    @output
+    @render.text
+    def txt7():
+      with open("data/mds.txt", "r") as fin:
+        mds = fin.read()
+        return mds
+      
     # @output
     # @render.image
     # def image2(): 
