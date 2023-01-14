@@ -46,6 +46,7 @@ app_ui = ui.page_fluid(
                    ui.tags.p(ui.output_text("txt6")),
                    ui.tags.p(ui.output_text("txt7")),
                    ui.output_image("image1"),
+                   width = 7
                ),
                ),
         ui.nav("Upload CoNLL-U files",
