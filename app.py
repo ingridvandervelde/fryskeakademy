@@ -40,7 +40,7 @@ app_ui = ui.page_fluid(
                ui.panel_main(
                    ui.tags.p(ui.output_text("txt1")),
                    ui.tags.p(ui.output_text("txt2")),
-                   ui.tags.p(ui.output_text("txt3")),
+                   #ui.tags.p(ui.output_text("txt3")),
                    ui.tags.p(ui.output_text("txt4")),
                    ui.tags.p(ui.output_text("txt5")),
                    ui.tags.p(ui.output_text("txt6")),
@@ -263,7 +263,7 @@ def server(input, output, session):
     @output
     @render.text
     def txt1():
-      with open("data/summary.txt", "r") as fin:
+      with open("data/sy.txt", "r") as fin:
         summary = fin.read()
         return summary
       
