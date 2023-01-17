@@ -1,0 +1,29 @@
+Summary of the project 
+	The project is a partnered work between students from the Datawise programme at the University of Groningen and the Fryske Akademy. The outcome of this dashboard app allows you to measure syntactic distances between two or more languages. 
+The goal of the app is to allow you, the user, to better understand the similarities and/or differences of multiple languages, especially Frisian. As part of preserving and promoting the Frisian language, with the support of the Fryske Akademy, we allow users to further explore the syntactic differences between Frisian and other languages through the ‘Pre-selected Option’, as users may compare Frisian and other Germanic and Scandinavian languages with each other. If you are interested in comparing other languages not included in the ‘Pre-selected’ section, then through our ‘Upload Option’ users may upload as many CONLL-U files at once to measure syntactic differences. 
+The method used is that of Nerbonne and Wiersma (2006) which is a Trigram Part-of-Speech Tagging method. The results will be presented to you in a table format, alongside two visualisations: 
+1) a multidimensional scale, and 
+2) a cluster diagram/ dendrogram. 
+The project was designed and executed by Ingrid, Maria, Athalia, Yasmina, and Joep, with the help of Dr. Heeringa from the Fryske Akademy. 
+
+The Upload Option
+	The Upload Option takes only CONLL-U file format. This format is used with text mining and natural language processing. Through downloading Corpuses from treebanks such as Universal Dependencies and converting them into the CONLL-U format, they can be uploaded onto the app to measure the syntactic differences. 
+After uploading the languages, the app will ask to specify the languages of the CONLL-U files. This can be done by typing the name of the languages in the text box which will show up after uploading your files. This is important to do since those names will be represented in the table and visualisations.  
+	 
+The Pre-Selected option 
+	The Pre-Selected option includes Germanic and Scandinavian languages including German, English, Frisian, Dutch, Icelandic, Faroese, Afrikaans, Norwegian, Swedish and Finnish. From these options, you may select multiple boxes to further explore the syntactic distances. 
+The languages contain pre-uploaded CONLLU-files from the Universal Dependencies treebank. 	
+	
+Pairwise comparison
+	Within the app there is the function for pairwise comparison. You can either turn it on or off. When turned on, the data sets are compared pairwise. Which means that the data sets are compared in pairs, and the results are based upon that. When turning this option off, all the datasets will be compared at the same time. 
+
+Table
+	The syntactic distances between the chosen languages will be presented in a table format. The syntactic distances can have values between 0-1. The syntactic distance is a derivative from the correlation coefficient. The closer to 0, the shorter the distance, the stronger the correlation between languages. 
+
+Cluster analysis
+	The cluster analysis is the first visualisation represented by the app. The cluster plot is represented by the dendrogram plot. A dendrogram presents the similarities of data points (understood as objects). The visualisation is in the form of cascading branches, where each branch represents a class-group variables categorised by their shared similarities. These are known as clusters, represented with different colours. 
+In understanding the diagram, the height differences in the clusters and branches are representative of the differences. In short, the various clusters are indicative of the general relationship between all the various.  
+
+Multidimensional Scaling (MDS)
+	Multidimensional Scaling (MDS) is a type of technique found in data analysis in which the similarity and the dissimilarity is represented through individual data points and plotted on a quadrant representing the multidimensional space. 
+In short, when interpreting the graph the distance between two (or more) individual points on the multidimensional space represent closeness or dis(similarity). Thus, the closer two dimensional points are, the more similar they are and vice versa. 

@@ -1,0 +1,6 @@
+The project is a partnered work between students from the Datawise programme at the University of Groningen and the Fryske Akademy. The outcome of this dashboard app allows you to measure syntactic distances between two or more languages. 
+The goal of the app is to allow you, the user, to better understand the similarities and/or differences of multiple languages, especially Frisian. As part of preserving and promoting the Frisian language, with the support of the Fryske Akademy, we allow users to further explore the syntactic differences between Frisian and other languages through the Pre-selected Option, as users may compare Frisian and other Germanic and Scandinavian languages with each other. If you are interested in comparing other languages not included in the Pre selected section, then through our Upload Option users may upload as many CONLL-U files at once to measure syntactic differences. 
+The method used is that of Nerbonne and Wiersma (2006) which is a Trigram Part of Speech Tagging method. The results will be presented to you in a table format, alongside two visualisations: 
+1) a multidimensional scale, and 
+2) a cluster diagram/ dendrogram. 
+The project was designed and executed by Ingrid, Maria, Athalia, Yasmina, and Joep, with the help of Dr. Heeringa from the Fryske Akademy. 
