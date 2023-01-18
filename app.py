@@ -69,6 +69,10 @@ app_ui = ui.page_fluid(
                    ),
                ),
                ),
+          # ui.nav_spacer(),
+          # ui.nav_control(
+          #   ui.a(ui.output_image("image2"))
+          #        ),
         # ui.nav("List of languages",
         #         ui.panel_title("Choose from a list of languages"),
         #
@@ -256,9 +260,16 @@ def server(input, output, session):
     def image1():
         from pathlib import Path
         dir = Path(__file__).resolve().parent
-        img: ImgData = {"src": str(dir / "data/updated_logo.jpeg"), "width": "300px"}
+        img: ImgData = {"src": str(dir / "data/logo_version_3.jpeg"), "width": "300px"}
         return img
     
+    # @output
+    # @render.image
+    # def image2():
+    #     from pathlib import Path
+    #     dir = Path(__file__).resolve().parent
+    #     img: ImgData = {"src": str(dir / "data/logo_version_3.jpeg"), "width": "1px"}
+    #     return img
       
     @output
     @render.text
@@ -271,7 +282,7 @@ def server(input, output, session):
     @output
     @render.text
     def txt2():
-      with open("data/upload.txt", "r") as fin:
+      with open("data/upload1.txt", "r") as fin:
         upload = fin.read()
         return upload
     
@@ -302,7 +313,7 @@ def server(input, output, session):
     @output
     @render.text
     def txt6():
-      with open("data/dnd.txt", "r") as fin:
+      with open("data/dnd1.txt", "r") as fin:
         dnd = fin.read()
         return dnd
     
@@ -310,7 +321,7 @@ def server(input, output, session):
     @output
     @render.text
     def txt7():
-      with open("data/mds.txt", "r") as fin:
+      with open("data/mds1.txt", "r") as fin:
         mds = fin.read()
         return mds
       
