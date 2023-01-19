@@ -20,7 +20,7 @@ from collections import Counter
 
 from shiny.types import ImgData
 
-from mds_cluster import create_dendogram, create_mds
+from mds_cluster import create_dendogram, create_mds, create_pca
 
 ### User Interace
 
@@ -216,7 +216,7 @@ def server(input, output, session):
     @reactive.event(input.x1)
     def multidimensional_clustering1():
         fig, ax = plt.subplots()
-        mds = create_mds(lang_distances.get(), ax)
+        pca = create_pca(lang_distances.get(), ax)
 
         return fig
 

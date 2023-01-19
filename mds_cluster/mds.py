@@ -1,4 +1,5 @@
 from sklearn.manifold import MDS
+from sklearn.decomposition import PCA
 import pandas as pd
 import matplotlib.pyplot as plt
 
@@ -19,6 +20,25 @@ def create_mds(distances: pd.DataFrame, ax: plt.Axes):
         ax.annotate(txt, (scaled_df[:, 0][i], scaled_df[:, 1][i]))
 
     return scaled_df
+
+
+def create_pca(distances: pd.DataFrame, ax: plt.Axes):
+    pca = PCA(n_components=2)
+    scaled_df = pca.fit_transform(distances)
+
+    # create scatterplot
+    ax.scatter(scaled_df[:, 0], scaled_df[:, 1])
+
+    # calculate explained variance
+    variance = round(sum(list(pca.explained_variance_ratio_))*100, 2)
+    ax.set_xlabel(f"Total Variance Explained: {variance}")
+
+    # add lables to each point
+    for i, txt in enumerate(distances.index):
+        ax.annotate(txt, (scaled_df[:, 0][i], scaled_df[:, 1][i]))
+
+    return scaled_df
+
 
 # Obsoleted
 # files = {
